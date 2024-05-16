@@ -1,6 +1,6 @@
 import psutil
 
-from flask import Flask
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
@@ -11,7 +11,7 @@ def index():
     Message = None
     if cpu_percent > 80 or mem_percent > 80:
        Message = "High CPU or memory utilization detected.Please scale up"
-    return f"CPU Utlization: {cpu_percent} And Memory Utlization:{mem_percent}"
+    return render_template("index.html",cpu_percent=cpu_percent , mem_percent=mem_percent, message=Message)
 
 if __name__== '__main__':
     app.run(debug=True, host='0.0.0.0')
